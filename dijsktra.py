@@ -23,17 +23,17 @@ for u in graph:
 # distance from A to A
 dist['A'] = 0
 
-H = [(start_node, 0)] # a tuple with the current node and its distance from A
+H = [(0, start_node)] # a tuple with the current node and its distance from A
 
 while H:
     # take the current node from the priority queue.
-    current_node, current_distance = heapq.heappop(H)
+    current_distance, current_node = heapq.heappop(H)
 
     for vertex in graph[current_node]:
         if dist[vertex] > current_distance + graph[current_node][vertex]:
             dist[vertex] = current_distance + graph[current_node][vertex] # current distance + weight
             prev[vertex] = current_node
-            heapq.heappush(H, (vertex, dist[vertex]))
+            heapq.heappush(H, (dist[vertex], vertex))
 
 
 
