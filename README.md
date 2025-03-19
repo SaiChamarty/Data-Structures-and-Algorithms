@@ -8,6 +8,7 @@ This algorithm is used to efficiently look up a particular item, for example a n
 n is the length of the array being searched
 
 ## Pseudocode:
+```
 sortedArray = [...]
 requiredNum = x
 indexInArray = -1 # to be calculated if it exists
@@ -24,6 +25,7 @@ while low <= high:
     else:
         index = mid
         break
+```
 
 # Depth First Search
 DFS searches a graph from the first node, to the deepest node first before searching adjacent nodes.
@@ -37,6 +39,7 @@ This is because each vertex is processed once, and every edge is explored in the
 We can say that the Time Complexity is O(n)
 
 ## Pseudocode:
+```
 graph = {}
 
 node = initial_node
@@ -53,6 +56,7 @@ while stack not empty:
     for neighbors of current_node:
         if neighbor not visited:
             stack.push(neighbor)
+```
 
 ## Breadth First Search
 BFS searches a graph from the first node, level by level. For performing this, we use a queue data structure to perform First In First Out functionality.
@@ -65,7 +69,7 @@ This is because each vertex is processed once, and every edge is explored in the
 We can say that the Time Complexity is O(n)
 
 ## Pseudocode
-
+```
 graph = {}
 start_node
 visited = {start_node}
@@ -82,3 +86,4 @@ while queue not empty:
             visited.add(neighbor)
 
 traversal_order will have our BFS traversal, which will be level by level.
+```
