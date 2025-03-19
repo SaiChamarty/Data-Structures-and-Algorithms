@@ -24,3 +24,32 @@ while low <= high:
     else:
         index = mid
         break
+
+# Depth First Search
+DFS searches a graph from the first node, to the deepest node first before searching adjacent nodes.
+We use a stack data structure to perform this.
+
+## Time Complexity
+DFS has a time complexity of O(V+E), where
+- V is the number of vertices.
+- E is the number of edges.
+This is because each vertex is processed once, and every edge is explored in the worst-case scenario.
+We can say that the Time Complexity is O(n)
+
+## Pseudocode:
+graph = {}
+
+node = initial_node
+stack = []
+visited = []
+traversal_order = []
+
+stack.push(node)
+
+while stack not empty:
+    current_node = stack.pop()
+    visited(current_node)
+    traversal_order.append(current_node)
+    for neighbors of current_node:
+        if neighbor not visited:
+            stack.push(neighbor)
