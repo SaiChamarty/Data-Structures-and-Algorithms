@@ -53,3 +53,32 @@ while stack not empty:
     for neighbors of current_node:
         if neighbor not visited:
             stack.push(neighbor)
+
+## Breadth First Search
+BFS searches a graph from the first node, level by level. For performing this, we use a queue data structure to perform First In First Out functionality.
+
+## Time Complexity
+BFS has a time complexity of O(V+E), where
+- V is the number of vertices.
+- E is the number of edges.
+This is because each vertex is processed once, and every edge is explored in the worst-case scenario.
+We can say that the Time Complexity is O(n)
+
+## Pseudocode
+
+graph = {}
+start_node
+visited = {start_node}
+
+queue = append(start_node)
+traversal_order = []
+
+while queue not empty:
+    current_node = queue.pop()
+    traversal_order.append(current_node)
+    for neighbors of current_node:
+        if neighbor not yet visited: 
+            queue.push(neighbor)
+            visited.add(neighbor)
+
+traversal_order will have our BFS traversal, which will be level by level.
