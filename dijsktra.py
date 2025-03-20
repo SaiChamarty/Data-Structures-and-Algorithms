@@ -30,7 +30,7 @@ while H:
     current_distance, current_node = heapq.heappop(H)
 
     for vertex in graph[current_node]:
-        if dist[vertex] > current_distance + graph[current_node][vertex]:
+        if current_distance + graph[current_node][vertex] < dist[vertex]:
             dist[vertex] = current_distance + graph[current_node][vertex] # current distance + weight
             prev[vertex] = current_node
             heapq.heappush(H, (dist[vertex], vertex))

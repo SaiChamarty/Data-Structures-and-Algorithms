@@ -87,3 +87,39 @@ while queue not empty:
 
 traversal_order will have our BFS traversal, which will be level by level.
 ```
+
+# Dijsktra's Algorithm
+This algorithm is used to find the shortest path from one node to every other node in a directed or undirected graph with edge weights.
+
+We can use a Priority Queue to implement this.
+A Priority Queue is an abstract data type that allows you to store elements along with priorities. You can quickly retrieve (and often remove) the element with the highest (or lowest) priority.
+
+In Dijsktra's algorithm, the priority queue is used to always select the next vertex with the smallest tentative distance.
+
+## Time Complexity: O((V+E) log V)
+This time complexity is when we use priority queue (using a binary heap) for retrieving and storing weights and edges. 
+
+## Pseudocode:
+
+```
+start_node
+dist = {initialized to all infinities} # shortest distance from starting node to every other node in the graph
+prev = {initialized to all zeros} # keeps track of shortest path
+
+priority_queue = [(0, start_node)] # is a tuple with initial weight and start_node
+
+while priority_queue is not empty:
+    current_weight, current_node = priority_queue.heappop()
+
+    for neighbors of current_node:
+        if current_weight + edge_weight[neighbor][current_node] < dist[neighbor]:
+            dist[neighbor] = current_weight + edge_weight[neighbor][current_node]
+            prev[neighbor] = current_node
+            priority_queue.heappush((dist[neighbor], neighbor))
+
+```
+
+### Explanation
+```dist``` dictionary stores the shortest distance from ```start_node``` to each node in the graph.
+```prev``` dictionary stores the previous node of each node in the shortest path. So this contains the shortest path.
+```priority_queue``` (implemented as a binary heap) stores tuples of the form (distance, node). Every time a node’s tentative distance is updated, it is pushed into the queue. When you pop from the queue, you get the node with the smallest tentative distance—the smallest sum of edge weights from the start_node to that node. This ensures that you process nodes in the order of increasing distance, so you don’t have to check all the edges repeatedly for each node, thus improving efficiency.
