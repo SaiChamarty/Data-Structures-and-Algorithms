@@ -123,3 +123,32 @@ while priority_queue is not empty:
 ```dist``` dictionary stores the shortest distance from ```start_node``` to each node in the graph. <br />
 ```prev``` dictionary stores the previous node of each node in the shortest path. So this contains the shortest path.<br />
 ```priority_queue``` (implemented as a binary heap) stores tuples of the form (distance, node). Every time a node’s tentative distance is updated, it is pushed into the queue. When you pop from the queue, you get the node with the smallest tentative distance—the smallest sum of edge weights from the start_node to that node. This ensures that you process nodes in the order of increasing distance, so you don’t have to check all the edges repeatedly for each node, thus improving efficiency.<br />
+
+
+## Prims Algorithm
+Prims algorithm is used to find the Minimum Spanning Tree of a graph.
+We use a priority queue here similar to Dijsktra!
+
+## Time Complexity: O((V+E) log V)
+
+## Pseudocode
+```
+# intialization
+cost = {initialized to all infitities}
+prev = {initialized to all zeros}
+start_node
+
+visited = {}
+
+priority_queue = [(0, start_node)]
+
+while priority_queue is not empty:
+    current_cost, current_node = priority_queue.heappop()
+    visited.add(current_node)
+    for neighbors of current_node:
+        if neighbor not yet visited:
+            if cost[neighbor] > graph[current_node][neighbor]:
+                cost[neighbor] = graph[current_node][neighbor]
+                prev[neighbor] = current_node
+                priority_queue.heappush((cost[neighbor], neighbor))
+```
