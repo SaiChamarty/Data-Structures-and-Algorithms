@@ -125,7 +125,7 @@ while priority_queue is not empty:
 ```priority_queue``` (implemented as a binary heap) stores tuples of the form (distance, node). Every time a node’s tentative distance is updated, it is pushed into the queue. When you pop from the queue, you get the node with the smallest tentative distance—the smallest sum of edge weights from the start_node to that node. This ensures that you process nodes in the order of increasing distance, so you don’t have to check all the edges repeatedly for each node, thus improving efficiency.<br />
 
 
-## Prims Algorithm
+# Prims Algorithm
 Prims algorithm is used to find the Minimum Spanning Tree of a graph.
 We use a priority queue here similar to Dijsktra!
 
@@ -151,4 +151,38 @@ while priority_queue is not empty:
                 cost[neighbor] = graph[current_node][neighbor]
                 prev[neighbor] = current_node
                 priority_queue.heappush((cost[neighbor], neighbor))
+```
+
+# Kruskal Algorithm
+Kruskal algorithm is also used to find the Minimum Spanning Tree of a graph.
+We use Union-Find data structure to implement this.
+
+## Time Complexity: O(E log E)
+
+## Pseudocode
+```
+graph = {}
+MST
+
+for each node in the graph:
+    create a Union_Find set
+
+def find(vertex):
+    if vertex.parent == vertex:
+        return vertex
+    else:
+        return find(vertex.parent)
+
+def union(u,v):
+    root_u = find(u)
+    root_v = find(v)
+    if root_u != root v:
+        root_v.parent = root_u
+
+sort all edges by weight
+
+for all edges {u,v} in edges:
+    if find(u) ≠ find(v):
+        add edge {u, v} to MST
+        Union(union_set(u),union_set(v))
 ```
