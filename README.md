@@ -186,3 +186,106 @@ for all edges {u,v} in edges:
         add edge {u, v} to MST
         Union(union_set(u),union_set(v))
 ```
+
+# Dynamic Programming
+Dynamic Programming is a method for solving complex problems by breaking them down into simpler, overlapping subproblems, solving each one once, and storing the results for reuse.
+
+We can better understand the concept of DP by implementing the following problems:
+1. Coin Changing Problem
+2. Knapsack Problem
+3. Seqence Alignment
+
+## Coin Changing Problem
+Given coin denominations D = {1, 3, 4} and a target value V = 6, use a dynamic programming approach to determine: <br />
+1. The minimum number of coins needed to make change for 6.
+2. One optimal set of coins that sums to 6
+
+HINT: <br />
+Define OPT(v) as the minimum number of coins needed to form the value v, with 
+recurrence: <br />
+    OPT(0) = 0, and for v > 0, <br />
+    OPT(v) = min {OPT(v-d) + 1} for all coin denominations d such that v-d >= 0.
+
+### Recursive Implementation of Coin Changing Problem:
+#### Time Complexity: O(n * V)
+In the recursive approach with memoization, each subproblem (each value from 0 to V, where V is the target) is solved once, and for each value, you iterate over all n coin denominations. Thus, the overall time complexity is O(n * V)
+#### Psudocode:
+```
+D = [1, 3, 4]
+target = 6
+# we will create a memo dictionary to save the previously computed values of OPT
+memo = {}
+
+def OPT(v):
+    # Base case:
+    if v is 0, 
+        return 0
+    
+    if v is already there in memo,
+        return memo[v]
+    
+    minCoins = inf
+
+    for each coin in D:
+        if v-coin >= 0:
+            result = OPT(v  - coin)
+        
+        if result is not inf:
+            minCoins = min(minCoins, result + 1) # added one coin
+    
+    # we store the computed result in the memo so that we don't have to compute it again
+    memo[v] = minCoins
+    return minCoins
+
+```
+
+### Inplementation of Coin Changing using an Array:
+#### Time Complexity: O(n * V)
+The array (bottom-up) approach runs in O(n * V) time, where n is the number of coin denomitions, and V is the target value. Because for each subproblem 1 to V, we loop through each of the coin denominations (n) once.
+#### Pseudocode
+```
+D = [1, 3, 4]
+target = 6
+OPT = [initialized to all infinities] * (target + 1)
+
+## Base Case: (very important!!)
+OPT[0] = 0
+
+# loop through everything from 1 to target + 1
+for v from 1 to target+1:
+    # then loop through all coin denominations
+    for coin in denominations:
+        if v >= coin:
+            OPT[v] = min(OPT[v], OPT(v-coin)+ 1) # save the min value
+```
+
+## Knapsack Problem
+We will be given a maximum weight capacity and different items with weights and values. The problem is to find a way to pack the maximum total value into the knapsack without exceeding its weight capacity. We can also identify which items make up this optimal solution.
+
+### Time Complexity: O(nW)
+Where n is the number of items and W is the total weight capacity of the knapsack.
+
+### Approach
+```
+1. Define the Subproblem
+    Let dp[i][w] be the maximum value achievable with the first i items and a knapsack capacity of w.
+2. Initialize a dp table (n+1) * (W+1)
+    The table will have all 0's (if it applies), n+1 rows and W+1 columns.
+3. Fill the dp table using recurrence relations below:
+    For each item i (with weights w_i and value v_i) and capacity w:
+        Case 1: Do not include item i.
+            We do not include item i if its weight is more than the current capacity w
+        Case 2: Include item i (w_i <= w):
+            dp[i][w] = v_i + dp[i-1][w - w_i]
+            Then we choose the max of the above two to fill in dp[i][w]
+4. Traceback
+    Now we traceback for finding the max values with the capacity. The idea is to start at the bottom right and work our way to top left, until i = 0 or w = 0.
+    1. Start at the end dp[i][n]
+    2. Compare current and previous rows:
+        - if dp[i][w] == dp[i-1][w]:
+            We did not include this item, so we skip it and not change w. But we reduce i by 1
+        - if dp[i][w] != dp[i-1][w]
+            We included this item. So we reduce w by w_i, and reduce i by 1. We also add the item's weight to optimal weight and record the item number in an array.
+    3. Termination
+        The loop will end, or the traceback terminates when there are no other rows to go up or w = 0, i.e., we reached the top left corner!
+```
