@@ -258,3 +258,34 @@ for v from 1 to target+1:
         if v >= coin:
             OPT[v] = min(OPT[v], OPT(v-coin)+ 1) # save the min value
 ```
+
+## Knapsack Problem
+We will be given a maximum weight capacity and different items with weights and values. The problem is to find a way to pack the maximum total value into the knapsack without exceeding its weight capacity. We can also identify which items make up this optimal solution.
+
+### Time Complexity: O(nW)
+Where n is the number of items and W is the total weight capacity of the knapsack.
+
+### Approach
+```
+1. Define the Subproblem
+    Let dp[i][w] be the maximum value achievable with the first i items and a knapsack capacity of w.
+2. Initialize a dp table (n+1) * (W+1)
+    The table will have all 0's (if it applies), n+1 rows and W+1 columns.
+3. Fill the dp table using recurrence relations below:
+    For each item i (with weights w_i and value v_i) and capacity w:
+        Case 1: Do not include item i.
+            We do not include item i if its weight is more than the current capacity w
+        Case 2: Include item i (w_i <= w):
+            dp[i][w] = v_i + dp[i-1][w - w_i]
+            Then we choose the max of the above two to fill in dp[i][w]
+4. Traceback
+    Now we traceback for finding the max values with the capacity. The idea is to start at the bottom right and work our way to top left, until i = 0 or w = 0.
+    1. Start at the end dp[i][n]
+    2. Compare current and previous rows:
+        - if dp[i][w] == dp[i-1][w]:
+            We did not include this item, so we skip it and not change w. But we reduce i by 1
+        - if dp[i][w] != dp[i-1][w]
+            We included this item. So we reduce w by w_i, and reduce i by 1. We also add the item's weight to optimal weight and record the item number in an array.
+    3. Termination
+        The loop will end, or the traceback terminates when there are no other rows to go up or w = 0, i.e., we reached the top left corner!
+```
