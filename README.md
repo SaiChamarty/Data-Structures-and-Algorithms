@@ -120,6 +120,6 @@ while priority_queue is not empty:
 ```
 
 ### Explanation
-```dist``` dictionary stores the shortest distance from ```start_node``` to each node in the graph.
-```prev``` dictionary stores the previous node of each node in the shortest path. So this contains the shortest path.
-```priority_queue``` (implemented as a binary heap) stores tuples of the form (distance, node). Every time a node’s tentative distance is updated, it is pushed into the queue. When you pop from the queue, you get the node with the smallest tentative distance—the smallest sum of edge weights from the start_node to that node. This ensures that you process nodes in the order of increasing distance, so you don’t have to check all the edges repeatedly for each node, thus improving efficiency.
+```dist``` dictionary stores the shortest distance from ```start_node``` to each node in the graph. <br />
+```prev``` dictionary stores the previous node of each node in the shortest path. So this contains the shortest path.<br />
+```priority_queue``` (implemented as a binary heap) stores tuples of the form (distance, node). Every time a node’s tentative distance is updated, it is pushed into the queue. When you pop from the queue, you get the node with the smallest tentative distance—the smallest sum of edge weights from the start_node to that node. This ensures that you process nodes in the order of increasing distance, so you don’t have to check all the edges repeatedly for each node, thus improving efficiency.<br />
