@@ -1,5 +1,7 @@
 # Data-Structures-and-Algorithms
-This repository consists of all the data structures and algorithms I learned and their example implementations.
+This repository consists of all the data structures and algorithms I learned and their example implementations in C++, Java and Python!
+"C++ and Java are in progress"
+Different algorithms and their pseudocodes are provided below.
 
 # Binary Search Algorithm
 This algorithm is used to efficiently look up a particular item, for example a number, from an array which is sorted in ascending or descending order.
